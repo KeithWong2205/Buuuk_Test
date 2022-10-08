@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppConstants {
-  // font
-  static String defaultFont = 'HelveticaNowDisplay';
-  static String paymentFont = 'Metropolis';
-
-  // image
-
   // color
   static Color color828796 = const Color(0xFF828796);
   static Color color3E4047 = const Color(0xFF3E4047);
@@ -17,20 +11,6 @@ class AppConstants {
   // space size
   static double paddingDefault = 16;
 
-  // style
-  static TextStyle textButton = const TextStyle(
-    fontSize: 15.0,
-  );
-
-  static TextStyle textDefault = const TextStyle(
-    fontSize: 14.0,
-  );
-
-  static TextStyle textSmall = const TextStyle(
-    fontSize: 10.0,
-  );
-
-  static TextStyle textLarge = const TextStyle(
-    fontSize: 18.0,
-  );
+  //String
+  static String posterLeading = 'http://image.tmdb.org/t/p/w185/';
 }
