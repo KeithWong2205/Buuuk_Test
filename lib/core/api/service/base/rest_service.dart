@@ -17,6 +17,8 @@ class RestService {
   }
 
   Future<ResponseMovieDetailModel> getMovieDetail(int movieId) async {
-    return ResponseMovieDetailModel();
+    Map<String, dynamic> queryData = {};
+    queryData['api_key'] = "a67a1892b7a906a0b14c396efa3502eb";
+    return await RestClient(_dio).getMovieDetail(movieId, queryData);
   }
 }
