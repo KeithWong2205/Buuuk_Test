@@ -1,3 +1,6 @@
+import 'package:buuk_test/helpers/app_constants.dart';
+import 'package:buuk_test/navigation/navigation_center.dart';
+import 'package:buuk_test/views/home_movie_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -25,6 +28,18 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return Container(color: Colors.blue);
+    return MaterialApp(
+      navigatorKey: NavigationCenter.navigatorKey,
+      title: '',
+      debugShowCheckedModeBanner: false,
+      showPerformanceOverlay: false,
+      showSemanticsDebugger: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: AppConstants.defaultFont,
+      ),
+      onGenerateRoute: NavigationCenter.generateRoute,
+      home: HomeMovieListScreen(),
+    );
   }
 }
