@@ -1,6 +1,5 @@
-import 'package:buuk_test/features/movie_list/view/home_movie_list_screen.dart';
+import 'package:buuk_test/features/movie_list/presentation/view/home_movie_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 
 class NavigationCenter {
   static final navigatorKey = GlobalKey<NavigatorState>();

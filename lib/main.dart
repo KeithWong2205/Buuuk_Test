@@ -9,8 +9,7 @@ Future<void> main() async {
   await AppUtils.init();
   runApp(
     AppConfig(
-      configUrl: GlobalConfig.configUrlDebug,
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
