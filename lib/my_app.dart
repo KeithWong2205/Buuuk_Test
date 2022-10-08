@@ -1,5 +1,6 @@
 import 'package:buuk_test/core/base/cubit/device_info_cubit.dart';
 import 'package:buuk_test/core/helpers/app_constants.dart';
+import 'package:buuk_test/features/movie_detail/presentation/cubit/movie_detail_cubit.dart';
 import 'package:buuk_test/features/movie_list/presentation/cubit/movie_list_cubit.dart';
 import 'package:buuk_test/features/movie_list/presentation/view/home_movie_list_screen.dart';
 import 'package:buuk_test/navigation/navigation_center.dart';
@@ -37,6 +38,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider(create: (_) => sl<MovieListCubit>()),
         BlocProvider(create: (_) => sl<DeviceInfoCubit>()),
+        BlocProvider(create: (_) => sl<MovieDetailCubit>()),
       ],
       child: MaterialApp(
         navigatorKey: NavigationCenter.navigatorKey,

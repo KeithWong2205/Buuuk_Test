@@ -20,3 +20,19 @@ class MovieListFetchSuccess extends MovieListState {
 
   List<Object> get props => [responseMovieListModel];
 }
+
+class MoreMovieFetchFailed extends MovieListState {
+  MoreMovieFetchFailed();
+
+  List<Object> get props => [];
+}
+
+class MoreMovieFetchSuccess extends MovieListState {
+  final ResponseMovieListModel responseMovieListModel;
+
+  MoreMovieFetchSuccess({
+    required this.responseMovieListModel,
+  });
+
+  List<Object> get props => [responseMovieListModel];
+}

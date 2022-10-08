@@ -10,7 +10,6 @@ import 'package:buuk_test/features/movie_list/domain/model/result_movie_item_mod
 import 'package:buuk_test/features/movie_list/presentation/cubit/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class HomeMovieListScreen extends StatefulWidget {
   const HomeMovieListScreen({Key? key}) : super(key: key);
@@ -20,10 +19,12 @@ class HomeMovieListScreen extends StatefulWidget {
 }
 
 class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
+  final _scrollController = ScrollController();
   List<ResultMovieItemModel> loaded = [];
   int page = 1;
   @override
   void initState() {
+    loaded.clear();
     super.initState();
     context.read<DeviceInfoCubit>().getVersionBuildInfo();
     context.read<MovieListCubit>().getNowPlayingMovies(page);
@@ -34,7 +35,7 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
     return BlocBuilder<MovieListCubit, MovieListState>(
       builder: (context, state) {
         if (state is MovieListInitial) {
-          EasyLoading.show();
+          loaded.clear();
           debugPrint("===> Movie List initial");
           return Scaffold(
             appBar: _buildAppBar(context),
@@ -43,17 +44,11 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
             ),
           );
         } else if (state is MovieListFetchSuccess) {
-          loaded.addAll(state.responseMovieListModel.results!);
+          // loaded.addAll(state.responseMovieListModel.results!);
           return Scaffold(
             appBar: _buildAppBar(context),
             body: _buildBody(context, loaded),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                page += 1;
-                context.read<MovieListCubit>().getNowPlayingMovies(page);
-              },
-              child: Icon(Icons.add),
-            ),
+            floatingActionButton: _buildButtonSet(context),
           );
         } else if (state is MovieListFetchFailed) {
           return Container(
@@ -62,6 +57,37 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
         }
         return const SizedBox();
       },
+    );
+  }
+
+  Widget _buildButtonSet(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        FloatingActionButton.extended(
+          onPressed: () {
+            _scrollController.animateTo(0, duration: const Duration(milliseconds: 1000), curve: Curves.ease);
+          },
+          backgroundColor: Colors.red.withOpacity(0.5),
+          foregroundColor: Colors.black,
+          label: const Text("Top"),
+          icon: const Icon(Icons.arrow_upward),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        FloatingActionButton.extended(
+          onPressed: () {
+            page += 1;
+            context.read<MovieListCubit>().getNowPlayingMovies(page);
+          },
+          backgroundColor: Colors.green.withOpacity(0.4),
+          foregroundColor: Colors.black,
+          label: const Text("Load more"),
+          icon: const Icon(Icons.add),
+        ),
+      ],
     );
   }
 
@@ -74,44 +100,49 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
 
   Widget _buildBody(BuildContext context, List<ResultMovieItemModel> moviesList) {
     return ListView.builder(
+        controller: _scrollController,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         itemCount: moviesList.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () {
-                AppNavigator.goToScreen(
-                    this,
-                    MovieDetailScreen(
-                      movieId: moviesList[index].id!,
-                    ),
-                    NavigationCenter.movieDetailScreen);
-              },
-              child: Row(
-                children: [
-                  SizedBox(
-                      height: 100,
-                      child: CachedNetworkImage(
-                        imageUrl: AppConstants.posterLeading + moviesList[index].poster_path!,
-                        filterQuality: FilterQuality.low,
-                      )),
-                  Expanded(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        moviesList[index].title!,
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(moviesList[index].release_date!),
-                    ],
-                  ))
-                ],
-              ),
-            ),
+            child: movieItem(moviesList, index),
           );
         });
+  }
+
+  Widget movieItem(List<ResultMovieItemModel> moviesList, int index) {
+    return GestureDetector(
+      onTap: () {
+        AppNavigator.goToScreen(
+            this,
+            MovieDetailScreen(
+              movieId: moviesList[index].id!,
+            ),
+            NavigationCenter.movieDetailScreen);
+      },
+      child: Row(
+        children: [
+          SizedBox(
+              height: 100,
+              child: CachedNetworkImage(
+                imageUrl: AppConstants.posterLeading + moviesList[index].poster_path!,
+                filterQuality: FilterQuality.low,
+              )),
+          Expanded(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                moviesList[index].title!,
+                textAlign: TextAlign.center,
+              ),
+              Text(moviesList[index].release_date!),
+            ],
+          ))
+        ],
+      ),
+    );
   }
 }
