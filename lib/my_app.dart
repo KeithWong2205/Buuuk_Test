@@ -1,6 +1,6 @@
-import 'package:buuk_test/helpers/app_constants.dart';
+import 'package:buuk_test/core/helpers/app_constants.dart';
+import 'package:buuk_test/features/movie_list/view/home_movie_list_screen.dart';
 import 'package:buuk_test/navigation/navigation_center.dart';
-import 'package:buuk_test/views/home_movie_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

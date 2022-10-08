@@ -1,5 +1,4 @@
-import 'package:buuk_test/views/home_movie_list_screen.dart';
-import 'package:buuk_test/views/movie_detail_screen.dart';
+import 'package:buuk_test/features/movie_list/view/home_movie_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -12,7 +11,7 @@ class NavigationCenter {
     switch (settings.name) {
       case homeScreen:
         return MaterialPageRoute(
-          builder: (_) => HomeMovieListScreen(),
+          builder: (_) => const HomeMovieListScreen(),
           settings: const RouteSettings(
             name: homeScreen,
           ),

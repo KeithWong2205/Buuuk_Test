@@ -1,6 +1,6 @@
-import 'package:buuk_test/helpers/app_config.dart';
-import 'package:buuk_test/helpers/app_utils.dart';
-import 'package:buuk_test/helpers/global_configs.dart';
+import 'package:buuk_test/core/helpers/app_config.dart';
+import 'package:buuk_test/core/helpers/app_utils.dart';
+import 'package:buuk_test/core/helpers/global_configs.dart';
 import 'package:buuk_test/my_app.dart';
 import 'package:flutter/material.dart';
 

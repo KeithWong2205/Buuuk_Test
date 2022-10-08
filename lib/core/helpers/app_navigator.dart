@@ -1,5 +1,6 @@
-import 'package:buuk_test/helpers/app_utils.dart';
-import 'package:buuk_test/helpers/base_state.dart';
+
+import 'package:buuk_test/core/helpers/app_utils.dart';
+import 'package:buuk_test/core/helpers/base_state.dart';
 import 'package:flutter/material.dart';
 
 class AppNavigator {

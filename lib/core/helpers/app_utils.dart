@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:buuk_test/navigation/navigation_center.dart';
-import 'package:buuk_test/di/injection_container.dart' as di;
+import 'package:buuk_test/core/di/injection_container.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
