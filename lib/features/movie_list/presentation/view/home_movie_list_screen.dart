@@ -109,11 +109,14 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
           onPressed: () {
             _scrollController.animateTo(0, duration: const Duration(milliseconds: 1000), curve: Curves.ease);
           },
-          backgroundColor: Colors.white.withOpacity(0.8),
+          backgroundColor: Colors.white.withOpacity(0.85),
           foregroundColor: Colors.red,
           label: const Text(
             "Top",
-            style: TextStyle(fontSize: 12),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           icon: const Icon(
             Icons.arrow_upward,
@@ -128,11 +131,14 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
             page += 1;
             context.read<MovieListCubit>().getNowPlayingMovies(page);
           },
-          backgroundColor: Colors.white.withOpacity(0.8),
+          backgroundColor: Colors.white.withOpacity(0.85),
           foregroundColor: Colors.green,
           label: const Text(
             "Load more",
-            style: TextStyle(fontSize: 12),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           icon: const Icon(
             Icons.add,
@@ -170,12 +176,9 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
               const SizedBox(width: 20),
               SizedBox(
                   height: 150,
-                  child: Hero(
-                    tag: moviesList[index].poster_path!,
-                    child: CachedNetworkImage(
-                      imageUrl: AppConstants.posterLeading + moviesList[index].poster_path!,
-                      filterQuality: FilterQuality.low,
-                    ),
+                  child: CachedNetworkImage(
+                    imageUrl: AppConstants.posterLeading + moviesList[index].poster_path!,
+                    filterQuality: FilterQuality.low,
                   )),
               Expanded(
                   child: Column(
@@ -243,5 +246,11 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
