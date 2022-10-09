@@ -180,71 +180,80 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
                     imageUrl: AppConstants.posterLeading + moviesList[index].poster_path!,
                     filterQuality: FilterQuality.low,
                   )),
-              Expanded(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    moviesList[index].title!,
-                    style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Popularity: ',
-                        style: AppConstants.bodyStyle.copyWith(fontSize: 14),
-                      ),
-                      Text(
-                        '${moviesList[index].popularity}',
-                        style: AppConstants.bodyStyle.copyWith(
-                            fontSize: 14,
-                            color: moviesList[index].popularity! >= 3500
-                                ? Colors.green
-                                : (moviesList[index].popularity! < 3500 && moviesList[index].popularity! >= 1500)
-                                    ? Colors.amber
-                                    : Colors.red),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Average score: ',
-                        style: AppConstants.bodyStyle.copyWith(fontSize: 14),
-                      ),
-                      Text(
-                        '${moviesList[index].vote_average}',
-                        style: AppConstants.bodyStyle.copyWith(
-                            fontSize: 14, color: moviesList[index].vote_average! >= 5.0 ? Colors.green : Colors.red),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Released on: ',
-                        style: AppConstants.bodyStyle.copyWith(fontSize: 14),
-                      ),
-                      Text(
-                        '${showingFormat.format(parsingFormat.parse(moviesList[index].release_date!))}',
-                        style: AppConstants.bodyStyle.copyWith(fontSize: 14, color: Colors.cyan),
-                      )
-                    ],
-                  ),
-                ],
-              ))
+              Expanded(child: _buildMovieNumbersSection(moviesList, index))
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Column _buildMovieNumbersSection(List<ResultMovieItemModel> moviesList, int index) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          moviesList[index].title!,
+          style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Popularity: ',
+              style: AppConstants.bodyStyle.copyWith(fontSize: 14),
+            ),
+            moviesList[index].popularity != null
+                ? Text(
+                    '${moviesList[index].popularity}',
+                    style: AppConstants.bodyStyle.copyWith(
+                        fontSize: 14,
+                        color: moviesList[index].popularity! >= 3500
+                            ? Colors.green
+                            : (moviesList[index].popularity! < 3500 && moviesList[index].popularity! >= 1500)
+                                ? Colors.amber
+                                : Colors.red),
+                  )
+                : const SizedBox()
+          ],
+        ),
+        const SizedBox(height: 5),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Average score: ',
+              style: AppConstants.bodyStyle.copyWith(fontSize: 14),
+            ),
+            moviesList[index].vote_average != null
+                ? Text(
+                    '${moviesList[index].vote_average}',
+                    style: AppConstants.bodyStyle.copyWith(
+                        fontSize: 14, color: moviesList[index].vote_average! >= 5.0 ? Colors.green : Colors.red),
+                  )
+                : const SizedBox()
+          ],
+        ),
+        const SizedBox(height: 5),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Released on: ',
+              style: AppConstants.bodyStyle.copyWith(fontSize: 14),
+            ),
+            moviesList[index].release_date != null
+                ? Text(
+                    showingFormat.format(parsingFormat.parse(moviesList[index].release_date!)),
+                    style: AppConstants.bodyStyle.copyWith(fontSize: 14, color: Colors.cyan),
+                  )
+                : const SizedBox()
+          ],
+        ),
+      ],
     );
   }
 
