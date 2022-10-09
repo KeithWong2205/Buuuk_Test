@@ -157,7 +157,7 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
         alignment: Alignment.center,
         children: [
           ColorFiltered(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.srcOver),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.65), BlendMode.srcOver),
             child: SizedBox(
                 child: CachedNetworkImage(
               fit: BoxFit.cover,
@@ -184,7 +184,7 @@ class _HomeMovieListScreenState extends BaseState<HomeMovieListScreen> {
                 children: [
                   Text(
                     moviesList[index].title!,
-                    style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                    style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 30),
