@@ -13,4 +13,14 @@ class AppConstants {
 
   //String
   static String posterLeading = 'http://image.tmdb.org/t/p/w185/';
+  static String backdropLeading = 'http://image.tmdb.org/t/p/w780/';
+
+  //TextStyle
+  static const TextStyle appBarStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle bodyStyle = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.normal);
 }

@@ -47,8 +47,8 @@ class _MyAppState extends State<MyApp> {
         showPerformanceOverlay: false,
         showSemanticsDebugger: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            primarySwatch: Colors.blue,
+            textTheme: const TextTheme(titleMedium: AppConstants.appBarStyle, bodyMedium: AppConstants.bodyStyle)),
         onGenerateRoute: NavigationCenter.generateRoute,
         home: HomeMovieListScreen(),
       ),

@@ -6,12 +6,18 @@ part 'result_movie_item_model.g.dart';
 @JsonSerializable()
 class ResultMovieItemModel extends BaseModel {
   int? id;
+  double? popularity;
+  double? vote_average;
   String? poster_path;
+  String? backdrop_path;
   String? release_date;
   String? title;
 
   ResultMovieItemModel({
     this.title,
+    this.popularity,
+    this.vote_average,
+    this.backdrop_path,
     this.release_date,
     this.poster_path,
   });

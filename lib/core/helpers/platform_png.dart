@@ -10,7 +10,7 @@ class PlatformPng {
     alignment = Alignment.center,
     String? semanticsLabel,
   }) {
-    var assetsImage = AssetImage('assets/image/$assetName.png');
+    var assetsImage = AssetImage('assets/images/$assetName.png');
     return Image(
       filterQuality: FilterQuality.high,
       image: assetsImage,
